@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef, useContext} from "react";
+import {updateWorkoutHistory} from "../api/firebase-methods";
 import {Context} from "./Context";
 import Lift from "./Lift";
 import Button from "./Button";
@@ -9,9 +10,8 @@ import "../Styles/styles.scss";
 function Current() {
   const [lifts, setLifts] = useState([1]);
   const [workoutArr, setWorkoutArr] = useState([]);
-  const [message, setMessage] = useState("");
   const liftNameInputRef = useRef(null);
-  const {user, updateContext} = useContext(Context);
+  const {userObj, userRef} = useContext(Context);
 
   function addLift() {
     const newLiftNum = lifts.length + 1;
@@ -41,21 +41,9 @@ function Current() {
     const year = today.getFullYear();
     const dateString = `${month}-${date}-${year}`;
     const workoutObj = {[dateString]: workoutArr};
-    
-    fetch(`/workout/addWorkout?user=${user}&workoutObj=${JSON.stringify(workoutObj)}`, {
-      method: "POST"
-    })
-    .then(res => {
-      if (!res.ok) {
-        res.text().then(text => {
-          setMessage("Error: Workout was not saved successfully.");
-          console.error(text);
-        });
-      } else {
-          setMessage("Workout saved to your history!");
-          updateContext();
-      }
-    });
+    const newWorkoutHistoryArr = [...userObj.workoutHistory, workoutObj];
+
+    updateWorkoutHistory(userRef, newWorkoutHistoryArr);
   }
 
   //Focuses the Lift input when a new lift is added
@@ -83,7 +71,6 @@ function Current() {
               id="save-button" 
               onClick={saveWorkout}
       />
-      <p className="message">{message}</p>
       <Timer />
       <LogoutButton id="logout-button-current"/>
     </div>
