@@ -1,6 +1,6 @@
 import React from 'react';
 import './Styles/styles.scss';
-import * as firebase from "firebase";
+import {initializeApp} from "firebase/app";
 import firebaseKeys from "./api/firebase-keys.js";
 import {Switch, Route, Redirect} from "react-router-dom";
 import {ContextProvider} from "./Components/Context";
@@ -11,10 +11,7 @@ import Login from "./Components/Login";
 
 function App() {
 
-  if (!firebase.apps.length) {
-    console.log('Connected with Firebase')
-    firebase.initializeApp(firebaseKeys.firebaseConfig);
-  }
+  initializeApp(firebaseKeys.firebaseConfig)
 
   return (
     <div className="App">

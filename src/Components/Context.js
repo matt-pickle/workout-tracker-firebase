@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import * as firebase from "firebase";
+import {onAuthStateChanged} from "firebase/auth";
+import {collection} from "firebase/firestore"
 const Context = React.createContext();
 
 function ContextProvider(props) {
@@ -7,9 +8,9 @@ function ContextProvider(props) {
   const [userRef, setUserRef] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = onAuthStateChanged(user => {
       if (user) {
-        const newUserRef = firebase.firestore().collection("users").doc(user.uid);
+        const newUserRef = collection("users").doc(user.uid);
         setUserRef(newUserRef);
         newUserRef.get()
         .then(doc => {

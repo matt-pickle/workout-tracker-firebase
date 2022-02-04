@@ -1,15 +1,21 @@
-import * as firebase from "firebase";
-import "firebase/firestore";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail
+} from "firebase/auth";
+import {collection} from "firebase/firestore";
 
 export async function registration(email, password) {
   const sanitizedEmail = email.toLowerCase().trim();
   try {
-    await firebase.auth().createUserWithEmailAndPassword(sanitizedEmail, password)
+    await createUserWithEmailAndPassword(sanitizedEmail, password)
     .then(userCredential => {
       if (userCredential) {
         const user = userCredential.user;
         user.sendEmailVerification();
-        firebase.firestore().collection("users").doc(user.uid).set({
+        collection("users").doc(user.uid).set({
           email: user.email,
           workoutHistory: [],
           weightHistory: []
@@ -29,12 +35,12 @@ export async function registration(email, password) {
 export async function logIn(email, password) {
   const sanitizedEmail = email.toLowerCase().trim();
   try {
-    await firebase.auth().signInWithEmailAndPassword(sanitizedEmail, password)
+    await signInWithEmailAndPassword(sanitizedEmail, password)
     .then(userCredential => {
       const user = userCredential.user;
       if (!user.emailVerified) {
         user.sendEmailVerification();
-        firebase.auth().signOut();
+        signOut();
         alert(
           "Unverified Email Address",
           "A new automated message with a verification link has been sent to your email. " +
@@ -49,7 +55,7 @@ export async function logIn(email, password) {
 
 export async function logOut() {
   try {
-    await firebase.auth().signOut();
+    await signOut();
   } catch(err) {
     alert("Error!", err.message);
   }
@@ -58,7 +64,7 @@ export async function logOut() {
 export async function resetPassword(email) {
   const sanitizedEmail = email.toLowerCase().trim();
   try {
-    await firebase.auth().sendPasswordResetEmail(sanitizedEmail);
+    await sendPasswordResetEmail(sanitizedEmail);
     alert(
       "Password Reset",
       "An automated message with a password reset link has been sent to your email."
@@ -72,13 +78,13 @@ export async function changeEmail(oldEmail, password, newEmail) {
   const sanitizedOldEmail = oldEmail.toLowerCase().trim();
   const sanitizedNewEmail = newEmail.toLowerCase().trim();
   try {
-    await firebase.auth().signInWithEmailAndPassword(sanitizedOldEmail, password)
+    await signInWithEmailAndPassword(sanitizedOldEmail, password)
     .then(() => {
-      const user = firebase.auth().currentUser;
+      const user = getAuth().currentUser;
       user.updateEmail(sanitizedNewEmail)
       .then(() => {
         user.sendEmailVerification();
-        firebase.firestore().collection("users").doc(user.uid).update({
+        collection("users").doc(user.uid).update({
           email: user.email,
         });
         alert(
@@ -96,9 +102,9 @@ export async function changeEmail(oldEmail, password, newEmail) {
 export async function changePassword(email, oldPassword, newPassword) {
   const lowerCaseEmail = email.toLowerCase();
   try {
-    await firebase.auth().signInWithEmailAndPassword(lowerCaseEmail, oldPassword)
+    await signInWithEmailAndPassword(lowerCaseEmail, oldPassword)
     .then(() => {
-      const user = firebase.auth().currentUser;
+      const user = getAuth().currentUser;
       user.updatePassword(newPassword)
       .then(() => {
         alert(
