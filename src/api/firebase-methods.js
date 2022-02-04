@@ -7,10 +7,12 @@ import {
 } from "firebase/auth";
 import {collection} from "firebase/firestore";
 
+const auth = getAuth();
+
 export async function registration(email, password) {
   const sanitizedEmail = email.toLowerCase().trim();
   try {
-    await createUserWithEmailAndPassword(sanitizedEmail, password)
+    await createUserWithEmailAndPassword(auth, sanitizedEmail, password)
     .then(userCredential => {
       if (userCredential) {
         const user = userCredential.user;
@@ -35,7 +37,7 @@ export async function registration(email, password) {
 export async function logIn(email, password) {
   const sanitizedEmail = email.toLowerCase().trim();
   try {
-    await signInWithEmailAndPassword(sanitizedEmail, password)
+    await signInWithEmailAndPassword(auth, sanitizedEmail, password)
     .then(userCredential => {
       const user = userCredential.user;
       if (!user.emailVerified) {
@@ -64,7 +66,7 @@ export async function logOut() {
 export async function resetPassword(email) {
   const sanitizedEmail = email.toLowerCase().trim();
   try {
-    await sendPasswordResetEmail(sanitizedEmail);
+    await sendPasswordResetEmail(auth, sanitizedEmail);
     alert(
       "Password Reset",
       "An automated message with a password reset link has been sent to your email."
@@ -78,7 +80,7 @@ export async function changeEmail(oldEmail, password, newEmail) {
   const sanitizedOldEmail = oldEmail.toLowerCase().trim();
   const sanitizedNewEmail = newEmail.toLowerCase().trim();
   try {
-    await signInWithEmailAndPassword(sanitizedOldEmail, password)
+    await signInWithEmailAndPassword(auth, sanitizedOldEmail, password)
     .then(() => {
       const user = getAuth().currentUser;
       user.updateEmail(sanitizedNewEmail)
@@ -102,7 +104,7 @@ export async function changeEmail(oldEmail, password, newEmail) {
 export async function changePassword(email, oldPassword, newPassword) {
   const lowerCaseEmail = email.toLowerCase();
   try {
-    await signInWithEmailAndPassword(lowerCaseEmail, oldPassword)
+    await signInWithEmailAndPassword(auth, lowerCaseEmail, oldPassword)
     .then(() => {
       const user = getAuth().currentUser;
       user.updatePassword(newPassword)

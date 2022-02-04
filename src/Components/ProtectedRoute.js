@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {Route, Redirect} from "react-router-dom";
-import {onAuthStateChanged} from "firebase/auth";
+import {getAuth, onAuthStateChanged} from "firebase/auth";
 
 function ProtectedRoute(props) {
   const [isAuth, setIsAuth] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(user => {
+    const unsubscribe = onAuthStateChanged(getAuth(), user => {
       if (user) {
         setIsAuth(true);        
       } else {
