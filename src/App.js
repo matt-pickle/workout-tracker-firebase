@@ -1,7 +1,7 @@
 import React from 'react';
 import './Styles/styles.scss';
 import {initializeApp} from "firebase/app";
-import firebaseKeys from "./api/firebase-keys.js";
+import firebaseConfig from "./api/firebase-keys.js";
 import {Switch, Route, Redirect} from "react-router-dom";
 import {ContextProvider} from "./Components/Context";
 import User from "./Components/User";
@@ -11,7 +11,7 @@ import Login from "./Components/Login";
 
 function App() {
 
-  initializeApp(firebaseKeys.firebaseConfig)
+  initializeApp(firebaseConfig);
 
   return (
     <div className="App">
