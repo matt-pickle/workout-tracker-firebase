@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import {register} from "../api/firebase-methods";
 import Button from "./Button";
 import "../Styles/styles.scss";
 
 function Register(props) {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState();
 
-  function handleNameChange(event) {
-    setUsername(event.target.value);
+  function handleEmailChange(event) {
+    setEmail(event.target.value);
   }
 
   function handlePasswordChange(event) {
@@ -17,36 +17,22 @@ function Register(props) {
   }
 
   function handleClick() {
-    fetch(`/user/register?username=${username}&password=${password}`, {
-      method: "POST"
-    })
-    .then(res => {
-      if (!res.ok) {
-        //Gives error message if registration is not successful
-        res.text().then(text => {
-          setMessage(text);
-          console.error(text);
-        })
-      } else {
-        //Redirects to home page if registration is successful
-        props.history.push("/");
-      }
-    });
-    setUsername("");
+    register(email, password);
+    props.history.push("/");
+    setEmail("");
     setPassword("");
   }
 
   return (
     <div className="register">
       <p className="reg-title">Register new user</p>
-      {message ? <p>***{message}***</p> : null}
       <div className="input-box reg-input-box">
-        <label htmlFor="reg-username">Username</label>
+        <label htmlFor="reg-username">Email</label>
         <div className="input-container">
           <input type="text"
                  id="reg-username"
-                 value={username}
-                 onChange={handleNameChange}
+                 value={email}
+                 onChange={handleEmailChange}
           />
         </div>
       </div>
