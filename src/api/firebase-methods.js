@@ -10,7 +10,7 @@ import {
   updateEmail,
   updatePassword
 } from "firebase/auth";
-import {getFirestore, collection, doc, setDoc, updateDoc} from "firebase/firestore";
+import {getFirestore, doc, setDoc, updateDoc} from "firebase/firestore";
 
 initializeApp(firebaseConfig);
 
