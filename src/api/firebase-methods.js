@@ -122,7 +122,7 @@ export async function changePassword(email, oldPassword, newPassword) {
 export async function updateWorkoutHistory(userUID, updatedWorkoutHistoryArr) {
   try {
     await updateDoc(doc(db, "users", userUID), {workoutHistory: updatedWorkoutHistoryArr});
-    alert("Workout saved successfully!");
+    // alert("Workout saved successfully!");
   } catch(err) {
     alert("Error! " + err.message);
   }

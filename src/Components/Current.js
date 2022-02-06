@@ -43,7 +43,8 @@ function Current() {
     const workoutObj = {[dateString]: workoutArr};
     const newWorkoutHistoryArr = [...userObj.workoutHistory, workoutObj];
 
-    updateWorkoutHistory(userUID, newWorkoutHistoryArr);
+    updateWorkoutHistory(userUID, newWorkoutHistoryArr)
+    .then(alert("Workout saved successfully"));
   }
 
   //Focuses the Lift input when a new lift is added
