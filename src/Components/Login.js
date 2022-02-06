@@ -16,8 +16,15 @@ function Login(props) {
     setPassword(event.target.value);
   }
 
-  function handleClick() {
+  function handleLogin() {
     logIn(email, password);
+    props.history.push("/user/current");
+    setEmail("");
+    setPassword("");
+  }
+
+  function handleGuestLogin() {
+    logIn("mattpickle@mattpickle.net", 123456);
     props.history.push("/user/current");
     setEmail("");
     setPassword("");
@@ -46,14 +53,16 @@ function Login(props) {
         </div>
     </div>
     <Button text="LOGIN"
-            onClick={handleClick}
+            onClick={handleLogin}
       />
     <p className="reg-text">Don't have an account?</p>
     <Link to="/register">
       <Button text="REGISTER NEW USER" />
     </Link>
-    <p className="reg-text"> or enter <span className="lowercase">"guest"</span>
-    <br/>as username and pwd</p>
+    <p className="reg-text">or</p>
+    <Button text="LOGIN AS GUEST"
+            onClick={handleGuestLogin}
+    />
   </div>
   )
 }
