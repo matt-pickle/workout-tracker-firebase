@@ -6,9 +6,11 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
-  sendEmailVerification
+  sendEmailVerification,
+  updateEmail,
+  updatePassword
 } from "firebase/auth";
-import {getFirestore, collection, doc, setDoc} from "firebase/firestore";
+import {getFirestore, collection, doc, setDoc, updateDoc} from "firebase/firestore";
 
 initializeApp(firebaseConfig);
 
@@ -85,15 +87,12 @@ export async function changeEmail(oldEmail, password, newEmail) {
   try {
     await signInWithEmailAndPassword(auth, sanitizedOldEmail, password)
     .then(() => {
-      const user = getAuth().currentUser;
-      user.updateEmail(sanitizedNewEmail)
+      updateEmail(auth.currentUser, sanitizedNewEmail)
       .then(() => {
-        user.sendEmailVerification();
-        collection("users").doc(user.uid).update({
-          email: user.email,
-        });
+        sendEmailVerification(auth.currentUser);
+        updateDoc(doc(db, "users", auth.currentUser.uid), {email: auth.currentUser.email});
         alert(
-          "Success! Your email address has been changed to " + user.email +
+          "Success! Your email address has been changed to " + newEmail +
           ". Please verify this address by clicking on the link in the automated verification message sent to your email."
         );
       });
@@ -104,12 +103,11 @@ export async function changeEmail(oldEmail, password, newEmail) {
 }
 
 export async function changePassword(email, oldPassword, newPassword) {
-  const lowerCaseEmail = email.toLowerCase();
+  const sanitizedEmail = email.toLowerCase().trim();
   try {
-    await signInWithEmailAndPassword(auth, lowerCaseEmail, oldPassword)
+    await signInWithEmailAndPassword(auth, sanitizedEmail, oldPassword)
     .then(() => {
-      const user = getAuth().currentUser;
-      user.updatePassword(newPassword)
+      updatePassword(auth.currentUser, newPassword)
       .then(() => {
         alert(
           "Success! Your password has been changed."
@@ -121,17 +119,18 @@ export async function changePassword(email, oldPassword, newPassword) {
   }
 }
 
-export async function updateWorkoutHistory(userRef, updatedWorkoutHistoryArr) {
+export async function updateWorkoutHistory(userUID, updatedWorkoutHistoryArr) {
   try {
-    await userRef.update({workoutHistory: updatedWorkoutHistoryArr});
+    await updateDoc(doc(db, "users", userUID), {workoutHistory: updatedWorkoutHistoryArr});
+    alert("Workout saved successfully!");
   } catch(err) {
     alert("Error! " + err.message);
   }
 }
 
-export async function updateWeightHistory(userRef, updatedWeightHistoryArr) {
+export async function updateWeightHistory(userUID, updatedWeightHistoryArr) {
     try {
-      await userRef.update({weightHistory: updatedWeightHistoryArr});
+      await updateDoc(doc(db, "users", userUID), {weightHistory: updatedWeightHistoryArr});
     } catch(err) {
       alert("Error! " + err.message);
     }

@@ -11,7 +11,7 @@ function Current() {
   const [lifts, setLifts] = useState([1]);
   const [workoutArr, setWorkoutArr] = useState([]);
   const liftNameInputRef = useRef(null);
-  const {userObj, userRef} = useContext(Context);
+  const {userObj, userUID} = useContext(Context);
 
   function addLift() {
     const newLiftNum = lifts.length + 1;
@@ -43,7 +43,7 @@ function Current() {
     const workoutObj = {[dateString]: workoutArr};
     const newWorkoutHistoryArr = [...userObj.workoutHistory, workoutObj];
 
-    updateWorkoutHistory(userRef, newWorkoutHistoryArr);
+    updateWorkoutHistory(userUID, newWorkoutHistoryArr);
   }
 
   //Focuses the Lift input when a new lift is added
