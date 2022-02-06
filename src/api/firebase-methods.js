@@ -1,3 +1,5 @@
+import firebaseConfig from "./firebase-keys.js";
+import {initializeApp} from "firebase/app";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -6,6 +8,8 @@ import {
   sendPasswordResetEmail
 } from "firebase/auth";
 import {collection} from "firebase/firestore";
+
+initializeApp(firebaseConfig);
 
 const auth = getAuth();
 

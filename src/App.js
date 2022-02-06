@@ -1,7 +1,5 @@
 import React from 'react';
 import './Styles/styles.scss';
-import {initializeApp} from "firebase/app";
-import firebaseConfig from "./api/firebase-keys.js";
 import {Switch, Route, Redirect} from "react-router-dom";
 import {ContextProvider} from "./Components/Context";
 import User from "./Components/User";
@@ -10,9 +8,6 @@ import Register from "./Components/Register";
 import Login from "./Components/Login";
 
 function App() {
-
-  initializeApp(firebaseConfig);
-
   return (
     <div className="App">
       <Switch>
@@ -28,7 +23,6 @@ function App() {
         <Route path="/login" component={Login} />
       </Switch>
     </div>
-    
   )
 }
 
