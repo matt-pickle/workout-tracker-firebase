@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import {register} from "../api/firebase-methods";
+import {registration} from "../api/firebase-methods";
 import Button from "./Button";
 import "../Styles/styles.scss";
 
@@ -17,7 +17,7 @@ function Register(props) {
   }
 
   function handleClick() {
-    register(email, password);
+    registration(email, password);
     props.history.push("/");
     setEmail("");
     setPassword("");
