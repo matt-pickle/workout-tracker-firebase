@@ -36,7 +36,11 @@ export function AuthProvider(props) {
         }
       })
     )
-  } 
+  }
+  
+  function logout() {
+    return signOut(auth)
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
@@ -48,7 +52,7 @@ export function AuthProvider(props) {
   }, [auth])
 
   return (
-    <AuthContext.Provider value={{currentUser, login}}>
+    <AuthContext.Provider value={{currentUser, login, logout}}>
       {!loading && props.children}
     </AuthContext.Provider>
   )

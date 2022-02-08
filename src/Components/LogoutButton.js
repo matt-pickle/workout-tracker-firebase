@@ -1,28 +1,27 @@
-import React, {useState} from "react";
-import Button from "./Button";
-import {Redirect} from "react-router-dom";
+import React from "react"
+import { useHistory } from "react-router-dom"
+import { useAuth } from "../Context/AuthContext"
+import Button from "./Button"
 
 function LogoutButton(props) {
-  const [redirect, setRedirect] = useState(false);
+  const { logout } = useAuth()
+  const history = useHistory()
 
-  function logout() {
-    fetch("/user/logout")
-    .then(res => {
-      if (!res.ok) {
-        console.error("Logout failed");
-      } else {
-        //Redirects to login page if logout is successful
-        setRedirect(true);
-      }
-    });
+  async function handleLogout() {
+    try {
+      await logout()
+      history.push("/login")
+    } catch (err) {
+      console.error(err)
+      alert("Logout failed due to server error")
+    }
   }
 
   return (
     <div id={props.id}>
       <Button text="LOGOUT"
-              onClick={logout}
+              onClick={handleLogout}
       />
-      {redirect ? <Redirect to="/login" /> : null}
     </div>
     
   )
