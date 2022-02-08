@@ -1,12 +1,15 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import {logIn} from "../api/firebase-methods";
+import { Link, useHistory } from "react-router-dom"
+import { useAuth } from "../Context/AuthContext"
 import Button from "./Button";
 import "../Styles/styles.scss";
 
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { login } = useAuth()
+  const history = useHistory();
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -16,18 +19,26 @@ function Login(props) {
     setPassword(event.target.value);
   }
 
-  function handleLogin() {
-    logIn(email, password);
-    props.history.push("/user/current");
-    setEmail("");
-    setPassword("");
+  async function handleLogin() {
+    try {
+      await login(email, password)
+      setEmail("")
+      setPassword("")
+      history.push("/user/current")
+    } catch {
+      alert("Login failed")
+    }   
   }
 
-  function handleGuestLogin() {
-    logIn("mattpickle@mattpickle.net", 123456);
-    props.history.push("/user/current");
-    setEmail("");
-    setPassword("");
+  async function handleGuestLogin() {
+    try {
+      await login("mattpickle@mattpickle.net", "123456")
+      setEmail("")
+      setPassword("")
+      history.push("/user/current")
+    } catch {
+      alert("Login failed")
+    } 
   }
 
   return (

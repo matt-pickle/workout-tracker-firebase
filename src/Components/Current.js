@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef, useContext} from "react";
 import {updateWorkoutHistory} from "../api/firebase-methods";
-import {Context} from "./Context";
+import { useAuth } from "../Context/AuthContext"
 import Lift from "./Lift";
 import Button from "./Button";
 import Timer from "./Timer";
@@ -11,7 +11,9 @@ function Current() {
   const [lifts, setLifts] = useState([1]);
   const [workoutArr, setWorkoutArr] = useState([]);
   const liftNameInputRef = useRef(null);
-  const {userObj, userUID} = useContext(Context);
+  
+  const { currentUser } = useAuth()
+  const userUID = currentUser.uid
 
   function addLift() {
     const newLiftNum = lifts.length + 1;
