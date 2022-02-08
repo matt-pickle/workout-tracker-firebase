@@ -35,9 +35,6 @@ export function AuthProvider(props) {
           );
         }
       })
-      .catch(err => {
-        console.error(err)
-      })
     )
   } 
 
@@ -48,7 +45,7 @@ export function AuthProvider(props) {
     })
 
     return unsubscribe
-  }, [])
+  }, [auth])
 
   return (
     <AuthContext.Provider value={{currentUser, login}}>

@@ -25,8 +25,9 @@ function Login(props) {
       setEmail("")
       setPassword("")
       history.push("/user/current")
-    } catch {
-      alert("Login failed")
+    } catch (err) {
+      console.error(err)
+      alert("Login failed due to server error")
     }   
   }
 
@@ -36,8 +37,9 @@ function Login(props) {
       setEmail("")
       setPassword("")
       history.push("/user/current")
-    } catch {
-      alert("Login failed")
+    } catch (err) {
+      console.error(err)
+      alert("Login failed due to server error")
     } 
   }
 
