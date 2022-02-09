@@ -1,22 +1,22 @@
-import React, {useState} from "react";
+import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../Context/AuthContext"
-import Button from "./Button";
-import "../Styles/styles.scss";
+import Button from "./Button"
+import "../Styles/styles.scss"
 
-function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function Login() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const { login } = useAuth()
-  const history = useHistory();
+  const history = useHistory()
 
   function handleEmailChange(event) {
-    setEmail(event.target.value);
+    setEmail(event.target.value)
   }
 
   function handlePasswordChange(event) {
-    setPassword(event.target.value);
+    setPassword(event.target.value)
   }
 
   async function handleLogin() {
@@ -80,4 +80,4 @@ function Login(props) {
   )
 }
 
-export default Login;
+export default Login
