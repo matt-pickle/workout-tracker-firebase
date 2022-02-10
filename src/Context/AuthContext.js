@@ -5,7 +5,9 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   signOut,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updateEmail
 } from "firebase/auth"
 import { getFirestore, doc, setDoc, updateDoc, onSnapshot } from "firebase/firestore"
 
@@ -76,8 +78,35 @@ export function AuthProvider(props) {
     return signOut(auth)
   }
 
+  function resetPassword(email) {
+    const sanitizedEmail = email.toLowerCase().trim()
+
+    return sendPasswordResetEmail(auth, sanitizedEmail)
+  }
+
+  function changeEmail(oldEmail, password, newEmail) {
+    const sanitizedOldEmail = oldEmail.toLowerCase().trim()
+    const sanitizedNewEmail = newEmail.toLowerCase().trim()
+
+    return (
+      signInWithEmailAndPassword(auth, sanitizedOldEmail, password)
+      .then(userCredential => {
+        const user = userCredential.user
+        updateEmail(user, sanitizedNewEmail)
+        .then(() => {
+          sendEmailVerification(user)
+          updateDoc(doc(db, "users", user.uid), { email: user.email })
+          alert(
+            "Success! Your email address has been changed to " + newEmail +
+            ". Please verify this address by clicking on the link in the automated verification message sent to your email."
+          )
+        })
+      })
+    )
+  }
+
   return (
-    <AuthContext.Provider value={{ currentUser, register, login, logout }}>
+    <AuthContext.Provider value={{ currentUser, register, login, logout, resetPassword, changeEmail }}>
       {!loading && props.children}
     </AuthContext.Provider>
   )
