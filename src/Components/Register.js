@@ -1,26 +1,34 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import {registration} from "../api/firebase-methods";
-import Button from "./Button";
-import "../Styles/styles.scss";
+import React, { useState } from "react"
+import { Link, useHistory } from "react-router-dom"
+import { useAuth } from "../Context/AuthContext"
+import Button from "./Button"
+import "../Styles/styles.scss"
 
-function Register(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function Register() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const { register } = useAuth()
+  const history = useHistory()
 
   function handleEmailChange(event) {
-    setEmail(event.target.value);
+    setEmail(event.target.value)
   }
 
   function handlePasswordChange(event) {
-    setPassword(event.target.value);
+    setPassword(event.target.value)
   }
 
-  function handleClick() {
-    registration(email, password);
-    props.history.push("/");
-    setEmail("");
-    setPassword("");
+  async function handleClick() {
+    try {
+      await register(email, password)
+      setEmail("")
+      setPassword("")
+      history.push("/user/current")
+    } catch (err) {
+      console.error(err)
+      alert("Registration failed due to server error")
+    }
   }
 
   return (
@@ -57,4 +65,4 @@ function Register(props) {
   )
 }
 
-export default Register;
+export default Register
