@@ -9,7 +9,14 @@ import {
   sendPasswordResetEmail,
   updateEmail
 } from "firebase/auth"
-import { getFirestore, doc, setDoc, updateDoc, onSnapshot } from "firebase/firestore"
+import {
+  getFirestore,
+  doc,
+  // getDoc,
+  setDoc,
+  updateDoc,
+  onSnapshot
+} from "firebase/firestore"
 
 
 const AuthContext = React.createContext()
@@ -20,6 +27,7 @@ export function useAuth() {
 
 export function AuthProvider(props) {
   const [currentUser, setCurrentUser] = useState()
+  const [userObj, setUserObj] = useState()
   const [loading, setLoading] = useState(true)
 
   const auth = getAuth()
@@ -28,11 +36,16 @@ export function AuthProvider(props) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       setCurrentUser(user)
+      if (user) {
+        onSnapshot(doc(db, "users", user.uid), doc => {
+          setUserObj(doc.data())
+        })
+      }
       setLoading(false)
     })
 
     return unsubscribe
-  }, [auth])
+  }, [auth, db])
 
   function register(email, password) {
     const sanitizedEmail = email.toLowerCase().trim()
@@ -105,8 +118,30 @@ export function AuthProvider(props) {
     )
   }
 
+  // function getUserObj() {
+  //   return (
+  //     getDoc(doc(db, "users", currentUser.uid))
+  //     .then(docSnap => {
+  //       if (docSnap.exists()) {
+  //         return docSnap.data()
+  //       }
+  //     })
+  //   )
+  // }
+
+  const value = {
+    currentUser,
+    register,
+    login,
+    logout,
+    resetPassword,
+    changeEmail,
+    // getUserObj,
+    userObj
+  }
+
   return (
-    <AuthContext.Provider value={{ currentUser, register, login, logout, resetPassword, changeEmail }}>
+    <AuthContext.Provider value={value}>
       {!loading && props.children}
     </AuthContext.Provider>
   )
