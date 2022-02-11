@@ -1,23 +1,21 @@
-import React, {useState, useEffect, useRef, useContext} from "react";
-import {updateWorkoutHistory} from "../api/firebase-methods";
+import React, { useState, useEffect, useRef } from "react"
 import { useAuth } from "../Context/AuthContext"
-import Lift from "./Lift";
-import Button from "./Button";
-import Timer from "./Timer";
-import LogoutButton from "./LogoutButton";
-import "../Styles/styles.scss";
+import Lift from "./Lift"
+import Button from "./Button"
+import Timer from "./Timer"
+import LogoutButton from "./LogoutButton"
+import "../Styles/styles.scss"
 
 function Current() {
-  const [lifts, setLifts] = useState([1]);
-  const [workoutArr, setWorkoutArr] = useState([]);
-  const liftNameInputRef = useRef(null);
+  const [lifts, setLifts] = useState([1])
+  const [workoutArr, setWorkoutArr] = useState([])
+  const liftNameInputRef = useRef(null)
   
-  const { currentUser } = useAuth()
-  const userUID = currentUser.uid
+  const { userObj, updateWorkoutHistory } = useAuth()
 
   function addLift() {
-    const newLiftNum = lifts.length + 1;
-    setLifts(prev => [...prev, newLiftNum]);
+    const newLiftNum = lifts.length + 1
+    setLifts(prev => [...prev, newLiftNum])
   }
 
   //Checks to see if the lift is already in workoutArr and replaces/adds it
@@ -25,28 +23,31 @@ function Current() {
     if (workoutArr.some(obj => obj.id === liftObj.id)) {
       setWorkoutArr(workoutArr.map(obj => {
         if (obj.id === liftObj.id) {
-          return liftObj;
+          return liftObj
         } else {
-          return obj;
+          return obj
         }
-      }));
+      }))
     } else {
-      setWorkoutArr([...workoutArr, liftObj]);
+      setWorkoutArr([...workoutArr, liftObj])
     }
   }
   
-  //Saves workout to database
-  function saveWorkout() {
-    const today = new Date();
-    const month = today.getMonth() + 1;
-    const date = today.getDate();
-    const year = today.getFullYear();
-    const dateString = `${month}-${date}-${year}`;
-    const workoutObj = {[dateString]: workoutArr};
-    const newWorkoutHistoryArr = [...userObj.workoutHistory, workoutObj];
-
-    updateWorkoutHistory(userUID, newWorkoutHistoryArr)
-    .then(alert("Workout saved successfully"));
+  async function saveWorkout() {
+    const today = new Date()
+    const month = today.getMonth() + 1
+    const date = today.getDate()
+    const year = today.getFullYear()
+    const dateString = `${month}-${date}-${year}`
+    const workoutObj = {[dateString]: workoutArr}
+    const newWorkoutHistory = [...userObj.workoutHistory, workoutObj]
+    try {
+      await updateWorkoutHistory(newWorkoutHistory)
+      alert("Workout saved successfully")
+    } catch (err) {
+      console.error(err)
+      alert("Workout save failed due to server error")
+    }
   }
 
   //Focuses the Lift input when a new lift is added

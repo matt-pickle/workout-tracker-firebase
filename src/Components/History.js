@@ -1,35 +1,37 @@
-import React, {useContext} from "react";
-import "../Styles/styles.scss";
-import {updateWorkoutHistory} from "../api/firebase-methods";
-import {Context} from "./Context";
-import PastWorkout from "./PastWorkout";
-import LogoutButton from "./LogoutButton";
+import React from "react"
+import { useAuth } from "../Context/AuthContext"
+import PastWorkout from "./PastWorkout"
+import LogoutButton from "./LogoutButton"
+import "../Styles/styles.scss"
 
 function History() {
-  const {userObj, userUID} = useContext(Context);
+  const { userObj, updateWorkoutHistory } = useAuth()
  
-  //Removes PastWorkout when "Remove" button is clicked
-  function removeWorkout(id) {
+  async function removeWorkout(id) {
     const newWorkoutHistory = userObj.workoutHistory.filter(workout => {
       return (userObj.workoutHistory.indexOf(workout) + 1) !== id
-    });
-    updateWorkoutHistory(userUID, newWorkoutHistory);
+    })
+    try {
+      await updateWorkoutHistory(newWorkoutHistory)
+    } catch(err) {
+      console.error(err)
+      alert("Workout removal failed due to server error")
+    }
   }
 
-  const pastWorkouts = userObj.workoutHistory ? 
-    userObj.workoutHistory.map(workout => {
-      const workoutObj = workout;
-      const workoutDate = Object.keys(workoutObj)
-      return (
-        <PastWorkout date={workoutDate}
-                     workoutArr={workoutObj[workoutDate]}
-                     removeWorkout={removeWorkout}
-                     id={userObj.workoutHistory.indexOf(workout) + 1}
-                     key={userObj.workoutHistory.indexOf(workout) + 1}
-        />
-      )
-    })
-  : null;
+  const pastWorkouts = userObj && userObj.workoutHistory.map(workout => {
+    const workoutObj = workout
+    const workoutDate = Object.keys(workoutObj)
+    return (
+      <PastWorkout
+        date={workoutDate}
+        workoutArr={workoutObj[workoutDate]}
+        removeWorkout={removeWorkout}
+        id={userObj.workoutHistory.indexOf(workout) + 1}
+        key={userObj.workoutHistory.indexOf(workout) + 1}
+      />
+    )
+  })
 
   return (
     <div className="history">
@@ -39,4 +41,4 @@ function History() {
   )
 }
 
-export default History;
+export default History

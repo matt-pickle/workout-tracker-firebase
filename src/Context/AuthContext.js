@@ -118,6 +118,14 @@ export function AuthProvider(props) {
     )
   }
 
+  function updateWorkoutHistory(newWorkoutHistory) {
+    return (
+      updateDoc(doc(db, "users", currentUser.uid), {
+        workoutHistory: newWorkoutHistory
+      })
+    )
+  }
+
   // function getUserObj() {
   //   return (
   //     getDoc(doc(db, "users", currentUser.uid))
@@ -131,13 +139,14 @@ export function AuthProvider(props) {
 
   const value = {
     currentUser,
+    userObj,
     register,
     login,
     logout,
     resetPassword,
     changeEmail,
     // getUserObj,
-    userObj
+    updateWorkoutHistory
   }
 
   return (
