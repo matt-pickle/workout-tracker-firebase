@@ -1,11 +1,12 @@
-import React from 'react';
-import './Styles/styles.scss';
-import {Switch, Route, Redirect} from "react-router-dom";
+import React from 'react'
+import { Switch, Route, Redirect } from "react-router-dom"
 import { AuthProvider } from "./Context/AuthContext"
-import User from "./Components/User";
-import ProtectedRoute from "./Components/ProtectedRoute";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
+import User from "./Components/User"
+import ProtectedRoute from "./Components/ProtectedRoute"
+import Register from "./Components/Register"
+import Login from "./Components/Login"
+import './Styles/styles.scss'
+
 
 function App() {
   return (
@@ -16,9 +17,7 @@ function App() {
             <Redirect to="/user" />
           </Route>
           <ProtectedRoute path="/user">
-            
-              <User />
-            
+            <User />
           </ProtectedRoute>
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
@@ -28,4 +27,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
