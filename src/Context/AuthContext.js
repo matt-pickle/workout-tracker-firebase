@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from "react"
+import "../api/firebase.js"
 import {
   getAuth,
   onAuthStateChanged,
@@ -12,7 +13,6 @@ import {
 import {
   getFirestore,
   doc,
-  // getDoc,
   setDoc,
   updateDoc,
   onSnapshot
@@ -126,16 +126,13 @@ export function AuthProvider(props) {
     )
   }
 
-  // function getUserObj() {
-  //   return (
-  //     getDoc(doc(db, "users", currentUser.uid))
-  //     .then(docSnap => {
-  //       if (docSnap.exists()) {
-  //         return docSnap.data()
-  //       }
-  //     })
-  //   )
-  // }
+  function updateWeightHistory(newWeightHistory) {
+    return (
+      updateDoc(doc(db, "users", currentUser.uid), {
+        weightHistory: newWeightHistory
+      })
+    )
+  }
 
   const value = {
     currentUser,
@@ -146,7 +143,8 @@ export function AuthProvider(props) {
     resetPassword,
     changeEmail,
     // getUserObj,
-    updateWorkoutHistory
+    updateWorkoutHistory,
+    updateWeightHistory
   }
 
   return (

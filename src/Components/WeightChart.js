@@ -1,26 +1,24 @@
-import React, {useContext} from "react";
-import {Chart} from "react-chartjs-2";
+import React from "react"
+import { Chart } from "react-chartjs-2"
 // eslint-disable-next-line no-unused-vars
-import {Chart as ChartJS} from 'chart.js/auto';
-import {Context} from "./Context";
-import "../Styles/styles.scss";
+import { Chart as ChartJS } from 'chart.js/auto'
+import { useAuth } from "../Context/AuthContext"
+import "../Styles/styles.scss"
 
 function WeightChart() {
-  const {userObj} = useContext(Context);
+  const { userObj } = useAuth()
   
-  const datesArr = userObj.weightHistory ? userObj.weightHistory.map(obj => {
-    const keyArr = Object.keys(obj);
-    return keyArr[0];
-  })
-  : null;
+  const datesArr = userObj && userObj.weightHistory.map(obj => {
+    const keyArr = Object.keys(obj)
 
-  const weightsArr = userObj.weightHistory ? userObj.weightHistory.map(obj => {
-    const valueArr = Object.values(obj);
-    return valueArr[0];
+    return keyArr[0]
   })
-  : null;
 
-  //Data and styling for the chart
+  const weightsArr = userObj && userObj.weightHistory.map(obj => {
+    const valueArr = Object.values(obj)
+    return valueArr[0]
+  })
+
   const chartData = {
     labels: datesArr,
     datasets: [{
@@ -31,7 +29,7 @@ function WeightChart() {
       pointBackgroundColor: "rgb(100, 100, 100)",
       tension: .25
     }]
-  };
+  }
   const chartOptions = {
     legend: {
       display: false
@@ -78,4 +76,4 @@ function WeightChart() {
   )
 }
 
-export default WeightChart;
+export default WeightChart
