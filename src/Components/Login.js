@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../Context/AuthContext"
 import Button from "./Button"
-import "../Styles/styles.scss"
+import styles from "../Styles/Login.module.scss"
 
 function Login() {
   const [email, setEmail] = useState("")
@@ -44,37 +44,43 @@ function Login() {
   }
 
   return (
-    <div className="register">
-      <div className="input-box reg-input-box">
-        <label htmlFor="reg-username">Email</label>
-        <div className="input-container">
-          <input type="text"
-                  id="reg-username"
-                  value={email}
-                  onChange={handleEmailChange}
+    <div className={styles.login}>
+      <div className={styles.inputBox}>
+        <label htmlFor="email">Email</label>
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            className={styles.emailInput}
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
           />
         </div>
       </div>
-      <div className="input-box reg-input-box">
-      <label htmlFor="reg-password">Password</label>
-        <div className="input-container">
-          <input type="password"
-                  id="reg-password"
-                  value={password}
-                  onChange={handlePasswordChange}
+      <div className={styles.inputBox}>
+      <label htmlFor="password">Password</label>
+        <div className={styles.inputContainer}>
+          <input
+            type="password"
+            className={styles.passwordInput}
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
           />
         </div>
     </div>
-    <Button text="LOGIN"
-            onClick={handleLogin}
-      />
-    <p className="reg-text">Don't have an account?</p>
+    <Button
+      text="LOGIN"
+      onClick={handleLogin}
+    />
+    <p className={styles.text}>Don't have an account?</p>
     <Link to="/register">
       <Button text="REGISTER NEW USER" />
     </Link>
-    <p className="reg-text">or</p>
-    <Button text="LOGIN AS GUEST"
-            onClick={handleGuestLogin}
+    <p className={styles.text}>or</p>
+    <Button
+      text="LOGIN AS GUEST"
+      onClick={handleGuestLogin}
     />
   </div>
   )

@@ -1,0 +1,23 @@
+.pastWorkout {
+  display: grid;
+  grid-gap: .5em;
+  max-width: 660px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: .5em;
+}
+
+.dateText {
+  justify-self: center;
+  font-weight: 700;
+  margin: .5em 0;
+}
+
+#removeBtn {
+  justify-self: center;
+}
+
+.boldText {
+  font-weight: 700;
+}

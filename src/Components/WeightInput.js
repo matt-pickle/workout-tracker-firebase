@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useAuth } from "../Context/AuthContext"
 import Button from "./Button"
-import "../Styles/styles.scss"
+import styles from "../Styles/WeightInput.module.scss"
 
 
 function WeightInput() {
@@ -31,11 +31,12 @@ function WeightInput() {
   }
 
   return (
-    <div className="input-box">
+    <div className={styles.inputBox}>
       <label htmlFor="weight">Current Weight</label>
-      <div className="input-container" id="weight-input-container">
+      <div className={styles.inputContainer}>
         <input
           type="text"
+          className={styles.weightInput}
           id="weight"
           value={input}
           onChange={handleChange}

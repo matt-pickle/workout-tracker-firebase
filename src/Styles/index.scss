@@ -13,6 +13,21 @@ body {
   text-transform: uppercase;
 }
 
+label {
+  color: white;
+  padding: .5em 1em;
+  background-color: black;
+  border-radius: 5px 0 0 5px;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  width: 1.4em;
+  height: 1.1em;
+}
+
 @media (max-width: 400px) {  
   body {
     font-size: .85rem;

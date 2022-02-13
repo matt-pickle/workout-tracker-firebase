@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../Context/AuthContext"
 import Button from "./Button"
-import "../Styles/styles.scss"
+import styles from "../Styles/Register.module.scss"
 
 function Register() {
   const [email, setEmail] = useState("")
@@ -32,32 +32,37 @@ function Register() {
   }
 
   return (
-    <div className="register">
-      <p className="reg-title">Register new user</p>
-      <div className="input-box reg-input-box">
-        <label htmlFor="reg-username">Email</label>
-        <div className="input-container">
-          <input type="text"
-                 id="reg-username"
-                 value={email}
-                 onChange={handleEmailChange}
+    <div className={styles.register}>
+      <p className={styles.title}>Register new user</p>
+      <div className={styles.inputBox}>
+        <label htmlFor="email">Email</label>
+        <div className={styles.inputContainer}>
+          <input
+            type="text"
+            className={styles.emailInput}
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
           />
         </div>
       </div>
-      <div className="input-box reg-input-box">
-      <label htmlFor="reg-password">Password</label>
-        <div className="input-container">
-          <input type="password"
-                 id="reg-password"
-                 value={password}
-                 onChange={handlePasswordChange}
+      <div className={styles.inputBox}>
+      <label htmlFor="password">Password</label>
+        <div className={styles.inputContainer}>
+          <input
+            type="password"
+            className={styles.passwordInput}
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
           />
         </div>
     </div>
-    <Button text="REGISTER"
-              onClick={handleClick}
-      />
-    <p className="reg-text">Already have an account?</p>
+    <Button
+      text="REGISTER"
+      onClick={handleClick}
+    />
+    <p className={styles.text}>Already have an account?</p>
     <Link to="/login">
       <Button text="GO TO LOGIN PAGE" />
     </Link>

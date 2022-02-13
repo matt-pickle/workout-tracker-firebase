@@ -2,7 +2,7 @@ import React from "react"
 import { useAuth } from "../Context/AuthContext"
 import PastWorkout from "./PastWorkout"
 import LogoutButton from "./LogoutButton"
-import "../Styles/styles.scss"
+import styles from "../Styles/History.module.scss"
 
 function History() {
   const { userObj, updateWorkoutHistory } = useAuth()
@@ -34,9 +34,9 @@ function History() {
   })
 
   return (
-    <div className="history">
+    <div className={styles.history}>
       {pastWorkouts}
-      <LogoutButton id="logout-button-history"/>
+      <LogoutButton id={styles.logoutBtn} />
     </div>
   )
 }

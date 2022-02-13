@@ -1,0 +1,25 @@
+@use "variables";
+
+.pastLift {
+  background-color: variables.$light-gray;
+  color: black;
+  border-radius: 5px;
+  line-height: 2;
+  font-weight: 400;
+  text-transform: none;
+  padding: .5em .75em;
+}
+
+.pastLiftText {
+  margin: 0;
+}
+
+.pastRepsText {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.boldText {
+  font-weight: 700;
+}

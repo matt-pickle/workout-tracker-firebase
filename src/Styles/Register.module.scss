@@ -1,0 +1,41 @@
+@use "variables";
+
+.register {
+  display: grid;
+  justify-items: center;
+  grid-gap: .5em;
+  background: variables.$medium-gray;
+  border-radius: 5px;
+  padding: .5em;
+  margin: 2em auto;
+}
+
+.title {
+  margin: 0 0 .25em;
+  font-size: 1.25rem;
+}
+
+.inputBox {
+  display: flex;
+  margin: 0;
+}
+
+.inputContainer {
+  background-color: white;
+  border-radius: 0 5px 5px 0;
+  padding: .5em .5em;
+}
+
+.emailInput {
+  width: 10.75em;
+}
+
+.passwordInput {
+  width: 8em;
+}
+
+.text {
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}

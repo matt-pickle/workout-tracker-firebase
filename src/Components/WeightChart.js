@@ -3,7 +3,7 @@ import { Chart } from "react-chartjs-2"
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto'
 import { useAuth } from "../Context/AuthContext"
-import "../Styles/styles.scss"
+import styles from "../Styles/WeightChart.module.scss"
 
 function WeightChart() {
   const { userObj } = useAuth()
@@ -16,6 +16,7 @@ function WeightChart() {
 
   const weightsArr = userObj && userObj.weightHistory.map(obj => {
     const valueArr = Object.values(obj)
+
     return valueArr[0]
   })
 
@@ -66,7 +67,7 @@ function WeightChart() {
   }
 
   return (
-    <div className="weight-chart">
+    <div className={styles.weightChart}>
       <Chart
         type="line"
         data={chartData}
