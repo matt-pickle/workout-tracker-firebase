@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 firebase-keys.js
+.firebase
+firestore.rules
+firebase.json
+.firebaserc
