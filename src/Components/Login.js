@@ -7,6 +7,7 @@ import styles from "../Styles/Login.module.scss"
 function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [message, setMessage] = useState("")
 
   const { login } = useAuth()
   const history = useHistory()
@@ -21,13 +22,19 @@ function Login() {
 
   async function handleLogin() {
     try {
-      await login(email, password)
-      setEmail("")
-      setPassword("")
-      history.push("/user/current")
+      if (!email) {
+        setMessage("Email is required")
+      } else if (!password) {
+        setMessage("Password is required")
+      } else {
+        await login(email, password)
+        setEmail("")
+        setPassword("")
+        history.push("/user/current")
+      }
     } catch (err) {
       console.error(err)
-      alert("Login failed due to server error")
+      setMessage("server error")
     }   
   }
 
@@ -39,12 +46,13 @@ function Login() {
       history.push("/user/current")
     } catch (err) {
       console.error(err)
-      alert("Login failed due to server error")
+      setMessage("server error")
     } 
   }
 
   return (
     <div className={styles.login}>
+      {message && <p className={styles.message}>*** {message} ***</p>}
       <div className={styles.inputBox}>
         <label htmlFor="email">Email</label>
         <div className={styles.inputContainer}>

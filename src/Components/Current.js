@@ -9,6 +9,7 @@ import styles from "../Styles/Current.module.scss"
 function Current() {
   const [lifts, setLifts] = useState([1])
   const [workoutArr, setWorkoutArr] = useState([])
+  const [message, setMessage] = useState("")
   const liftNameInputRef = useRef(null)
   
   const { userObj, updateWorkoutHistory } = useAuth()
@@ -43,10 +44,10 @@ function Current() {
     const newWorkoutHistory = [...userObj.workoutHistory, workoutObj]
     try {
       await updateWorkoutHistory(newWorkoutHistory)
-      alert("Workout saved successfully")
+      setMessage("Workout saved")
     } catch (err) {
       console.error(err)
-      alert("Workout save failed due to server error")
+      setMessage("server error")
     }
   }
 
@@ -75,6 +76,7 @@ function Current() {
           onClick={addLift}
         />
       </div>
+      {message && <p className={styles.message}>*** {message} ***</p>}
       <Button
         text="SAVE WORKOUT"
         id={styles.saveButton} 

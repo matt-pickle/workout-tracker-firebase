@@ -26,7 +26,7 @@ function WeightInput() {
       setInput("")
     } catch (err) {
       console.error(err)
-      alert("Save failed due to server error")
+      alert("server error")
     }
   }
 

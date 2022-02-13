@@ -19,7 +19,8 @@
 }
 
 .message {
-  margin-bottom: 2em;
+  color: variables.$light-gray;
+  margin: 1em;
 }
 
 @media (min-width: 1000px) {
