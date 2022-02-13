@@ -1,9 +1,9 @@
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
-import "../Styles/styles.scss";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import styles from "../Styles/NavButton.module.scss"
 
 function NavButton(props) {
-  const [hoverClass, setHoverClass] = useState("");
+  const [hoverClass, setHoverClass] = useState("")
 
   //Applies hover effect class if not using a touch screen
   function hover() {
@@ -12,34 +12,34 @@ function NavButton(props) {
       || navigator.msMaxTouchPoints > 0) {
         setHoverClass("")
     } else {
-      setHoverClass("hovered");
+      setHoverClass("hovered")
     }
   }
 
   function unHover() {
-    setHoverClass("");
+    setHoverClass("")
   }
 
   function touch() {
-    setHoverClass("hovered");
+    setHoverClass("hovered")
   }
 
   function unTouch() {
-    setHoverClass("");
+    setHoverClass("")
   }
 
   return (
-    <Link to={props.link}
-          className={`button nav-button ${hoverClass}`}
-          onMouseEnter={hover}
-          onMouseLeave={unHover}
-          onTouchStart={touch}
-          onTouchEnd={unTouch}
+    <Link
+      to={props.link}
+      className={`${styles.navButton} ${styles[hoverClass]}`}
+      onMouseEnter={hover}
+      onMouseLeave={unHover}
+      onTouchStart={touch}
+      onTouchEnd={unTouch}
     >
       {props.text}
     </Link>
   )
 }
-
 
 export default NavButton;

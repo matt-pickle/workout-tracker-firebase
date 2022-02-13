@@ -1,23 +1,24 @@
-import React from "react";
-import NavButton from "./NavButton";
-import "../Styles/styles.scss";
+import React from "react"
+import NavButton from "./NavButton"
+import styles from "../Styles/Navigation.module.scss"
 
 function Navigation() {
   return (
-    <div className="nav">
-      <NavButton text="HISTORY"
-              link="/user/history"
+    <div className={styles.nav}>
+      <NavButton
+        text="HISTORY"
+        link="/user/history"
       />
-      <NavButton text="CURRENT"
-              link="/user/current"
+      <NavButton
+        text="CURRENT"
+        link="/user/current"
       />
-      <NavButton text="WEIGHT"
-              link="/user/weight"
+      <NavButton
+        text="WEIGHT"
+        link="/user/weight"
       />
     </div>
-    
   )
 }
 
-
-export default Navigation;
+export default Navigation

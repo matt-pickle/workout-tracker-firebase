@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from "react";
-import "../Styles/styles.scss";
+import React, { useState, useEffect } from "react"
+import styles from "../Styles/InputBox.module.scss"
 
 function InputBox(props, ref) {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("")
 
   function handleChange(event) {
-    setInput(event.target.value);
+    setInput(event.target.value)
   }
 
   useEffect(() => {
@@ -13,18 +13,19 @@ function InputBox(props, ref) {
   }, [input])
 
   return (
-    <div className="input-box" id={props.name + "-input-box"}>
+    <div className={styles.inputBox} id={props.name + "-input-box"}>
       <label htmlFor={props.name}>{props.name}</label>
-      <div className="input-container">
-        <input type="text"
-               id={props.name}
-               value={input}
-               onChange={handleChange}
-               ref={ref}
+      <div className={styles.inputContainer}>
+        <input
+          type="text"
+          className={styles[props.name]}
+          value={input}
+          onChange={handleChange}
+          ref={ref}
         />
       </div>
     </div>
   )
 }
 
-export default React.forwardRef(InputBox);
+export default React.forwardRef(InputBox)

@@ -19,12 +19,13 @@ function LogoutButton(props) {
 
   return (
     <div id={props.id}>
-      <Button text="LOGOUT"
-              onClick={handleLogout}
+      <Button
+        text="LOGOUT"
+        onClick={handleLogout}
       />
     </div>
     
   )
 }
 
-export default LogoutButton;
+export default LogoutButton

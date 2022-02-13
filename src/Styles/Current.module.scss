@@ -1,0 +1,57 @@
+@use "variables";
+
+.current {
+  display: grid;
+  justify-items: center;
+}
+
+.liftsContainer {
+  display: grid;
+  justify-items: center;
+  grid-gap: .5em;
+  margin-bottom: 4em;
+}
+
+#saveButton {
+  width: 15em;
+  height: 4em;
+  margin-bottom: .5em;
+}
+
+.message {
+  margin-bottom: 2em;
+}
+
+@media (min-width: 1000px) {
+  .current {
+    align-items: start;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 15em 4em 4em 1em;
+    grid-column-gap: 1em;
+    grid-template-areas:
+     "left timer"
+     "left save"
+     "left message"
+     "left logout";
+  }
+
+  .liftsContainer {
+    grid-area: left;
+  }
+
+  .timer {
+    grid-area: timer;
+  }
+
+  #saveButton {
+    grid-area: save;
+  }
+
+  .message {
+    grid-area: message;
+  }
+
+  #logoutButton {
+    grid-area: logout;
+  }
+}

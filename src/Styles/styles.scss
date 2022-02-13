@@ -7,67 +7,76 @@ $light-gray: rgb(200, 200, 200);
 
 //GENERAL
 
-*{
-  box-sizing: border-box;
-}
+// *{
+//   box-sizing: border-box;
+// }
 
-body {
-  margin: 0;
-  background: $background-gray;
-  font-family: Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
+// body {
+//   margin: 0;
+//   background: $background-gray;
+//   font-family: Helvetica, sans-serif;
+//   font-size: 16px;
+//   font-weight: 700;
+//   text-transform: uppercase;
+// }
 
-.App {
-  display: grid;
-  padding: .5em;
-}
+// .App {
+//   display: grid;
+//   padding: .5em;
+//   background-color: red
+// }
 
-.button {
-  border: none;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 5px;
-  padding: .5em 1.4em; 
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  color: black;
-  background-color: $light-gray;
-  cursor: pointer;
-}
+// .button {
+//   border: none;
+//   text-decoration: none;
+//   text-align: center;
+//   border-radius: 5px;
+//   padding: .5em 1.4em; 
+//   font-family: inherit;
+//   font-size: inherit;
+//   font-weight: inherit;
+//   color: black;
+//   background-color: blue;
+//   cursor: pointer;
+// }
 
-.hovered {
-  background-color: $dark-gray;
-}
+// .hovered {
+//   background-color: $dark-gray;
+// }
 
-.input-box {
-  display: flex;
-  margin: .25em;
-}
+// .input-box {
+//   display: flex;
+//   margin: .25em;
+// }
 
-label {
-  color: white;
-  padding: .5em 1em;
-  background-color: black;
-  border-radius: 5px 0 0 5px;
-}
+// label {
+//   color: white;
+//   padding: .5em 1em;
+//   background-color: black;
+//   border-radius: 5px 0 0 5px;
+// }
 
-input {
-  font-family: inherit;
-  font-size: inherit;
-  border: none;
-  width: 1.4em;
-  height: 1.1em;
-}
+// input {
+//   font-family: inherit;
+//   font-size: inherit;
+//   border: none;
+//   width: 1.4em;
+//   height: 1.1em;
+// }
 
-.input-container {
-  background-color: white;
-  border-radius: 0 5px 5px 0;
-  padding: .5em .5em;
-}
+// .input-container {
+//   background-color: white;
+//   border-radius: 0 5px 5px 0;
+//   padding: .5em .5em;
+// }
+
+// #Lift {
+//   width: 8em;
+// }
+
+// #Weight {
+//   width: 2em;
+// }
 
 //REGISTER AND LOGIN PAGES
 
@@ -110,104 +119,104 @@ input {
 
 //NAVIGATION
 
-.nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: .5em;
-  margin: 0 auto 1em;
-  max-width: 600px;
-}
+// .nav {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr;
+//   grid-gap: .5em;
+//   margin: 0 auto 1em;
+//   max-width: 600px;
+// }
 
-.nav-button {
-  flex: 1;
-}
+// .nav-button {
+//   flex: 1;
+// }
 
 //CURRENT WORKOUT PAGE
 
-.home {
-  display: grid;
-  justify-items: center;
-}
+// .home {
+//   display: grid;
+//   justify-items: center;
+// }
 
-.lifts-container {
-  display: grid;
-  justify-items: center;
-  grid-gap: .5em;
-  margin-bottom: 4em;
-}
+// .lifts-container {
+//   display: grid;
+//   justify-items: center;
+//   grid-gap: .5em;
+//   margin-bottom: 4em;
+// }
 
-.lift-box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: $medium-gray;
-  border-radius: 5px;
-  padding: .25em;
-}
+// .lift-box {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   background-color: $medium-gray;
+//   border-radius: 5px;
+//   padding: .25em;
+// }
 
-#add-set-button {
-  margin: .25em;
-}
+// #add-set-button {
+//   margin: .25em;
+// }
 
-#Lift {
-  width: 8em;
-}
+// #Lift {
+//   width: 8em;
+// }
 
-#Weight {
-  width: 2em;
-}
+// #Weight {
+//   width: 2em;
+// }
 
-#save-button {
-  width: 15em;
-  height: 4em;
-  margin-bottom: .5em;
-}
+// #save-button {
+//   width: 15em;
+//   height: 4em;
+//   margin-bottom: .5em;
+// }
 
-.message {
-  margin-bottom: 2em;
-}
+// .message {
+//   margin-bottom: 2em;
+// }
 
-.timer {
-  display: grid;
-  grid-gap: .5em;
-  background-color: $medium-gray;
-  border-radius: 5px;
-  margin-bottom: 2em;
-  padding: .5em;
-}
+// .timer {
+//   display: grid;
+//   grid-gap: .5em;
+//   background-color: $medium-gray;
+//   border-radius: 5px;
+//   margin-bottom: 2em;
+//   padding: .5em;
+// }
 
-.timer-inputs {
-  display: flex;
-  justify-content: space-between;
-}
+// .timer-inputs {
+//   display: flex;
+//   justify-content: space-between;
+// }
 
-#minutes-input,
-#seconds-input {
-  width: 1.59em;
-  height: 1.25em;
-  background-color: white;
-  font-weight: 700;
-  font-size: 4.25rem;
-  border: 0;
-  border-radius: 5px;
-}
+// #minutes-input,
+// #seconds-input {
+//   width: 1.59em;
+//   height: 1.25em;
+//   background-color: white;
+//   font-weight: 700;
+//   font-size: 4.25rem;
+//   border: 0;
+//   border-radius: 5px;
+// }
 
-.timer-display {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  margin: 0;
-  height: 1.25em;
-  background-color: white;
-  border-radius: 5px;
-  font-size: 4.25rem;
-  font-weight: 700;
-}
+// .timer-display {
+//   display: grid;
+//   justify-items: center;
+//   align-items: center;
+//   margin: 0;
+//   height: 1.25em;
+//   background-color: white;
+//   border-radius: 5px;
+//   font-size: 4.25rem;
+//   font-weight: 700;
+// }
 
-#start-button, #stop-button {
-  width: 14em;
-  height: 4em;
-}
+// #start-button, #stop-button {
+//   width: 14em;
+//   height: 4em;
+// }
 
 //HISTORY PAGE
 
@@ -287,48 +296,48 @@ input {
 
 //MEDIA QUERIES
 
-@media (max-width: 400px) {  
-  body {
-    font-size: .85rem;
-  }
+// @media (max-width: 400px) {  
+//   body {
+//     font-size: .85rem;
+//   }
 
-  #minutes-input,
-  #seconds-input,
-  .timer-display {
-    font-size: 3.6rem;
-  }
-}
+//   #minutes-input,
+//   #seconds-input,
+//   .timer-display {
+//     font-size: 3.6rem;
+//   }
+// }
 
-@media (min-width: 1000px) {
-  .home {
-    align-items: start;
-    grid-template-columns: 70% 30%;
-    grid-template-rows: 15em 4em 4em 1em;
-    grid-column-gap: 1em;
-    grid-template-areas:
-     "left timer"
-     "left save"
-     "left message"
-     "left logout";
-  }
+// @media (min-width: 1000px) {
+//   .home {
+//     align-items: start;
+//     grid-template-columns: 70% 30%;
+//     grid-template-rows: 15em 4em 4em 1em;
+//     grid-column-gap: 1em;
+//     grid-template-areas:
+//      "left timer"
+//      "left save"
+//      "left message"
+//      "left logout";
+//   }
 
-  .lifts-container {
-    grid-area: left;
-  }
+//   .lifts-container {
+//     grid-area: left;
+//   }
 
-  .timer {
-    grid-area: timer;
-  }
+//   .timer {
+//     grid-area: timer;
+//   }
 
-  #save-button {
-    grid-area: save;
-  }
+//   #save-button {
+//     grid-area: save;
+//   }
 
-  .message {
-    grid-area: message;
-  }
+//   .message {
+//     grid-area: message;
+//   }
 
-  #logout-button-current {
-    grid-area: logout;
-  }
-}
+//   #logout-button-current {
+//     grid-area: logout;
+//   }
+// }

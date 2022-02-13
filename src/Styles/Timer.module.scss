@@ -1,0 +1,16 @@
+@use "variables";
+
+.timer {
+  display: grid;
+  grid-gap: .5em;
+  background-color: variables.$medium-gray;
+  border-radius: 5px;
+  margin-bottom: 2em;
+  padding: .5em;
+}
+
+#startButton,
+#stopButton {
+  width: 14em;
+  height: 4em;
+}

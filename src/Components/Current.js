@@ -4,7 +4,7 @@ import Lift from "./Lift"
 import Button from "./Button"
 import Timer from "./Timer"
 import LogoutButton from "./LogoutButton"
-import "../Styles/styles.scss"
+import styles from "../Styles/Current.module.scss"
 
 function Current() {
   const [lifts, setLifts] = useState([1])
@@ -56,29 +56,34 @@ function Current() {
   }, [lifts]);
 
   const allLifts = lifts.map(liftNum => {
-    return <Lift key={liftNum}
-                 id={liftNum}
-                 ref={liftNameInputRef}
-                 addToWorkout={addToWorkout}
-    />
+    return (    
+      <Lift
+        key={liftNum}
+        id={liftNum}
+        ref={liftNameInputRef}
+        addToWorkout={addToWorkout}
+      />
+    )
   })
 
   return (
-    <div className="home">
-      <div className="lifts-container">
+    <div className={styles.current}>
+      <div className={styles.liftsContainer}>
         {allLifts}
-        <Button text="ADD LIFT"
-                onClick={addLift}
+        <Button
+          text="ADD LIFT"
+          onClick={addLift}
         />
       </div>
-      <Button text="SAVE WORKOUT"
-              id="save-button" 
-              onClick={saveWorkout}
+      <Button
+        text="SAVE WORKOUT"
+        id={styles.saveButton} 
+        onClick={saveWorkout}
       />
-      <Timer />
-      <LogoutButton id="logout-button-current"/>
+      <Timer className={styles.timer}/>
+      <LogoutButton id={styles.logoutButton}/>
     </div>
   )
 }
 
-export default Current;
+export default Current

@@ -5,12 +5,12 @@ import User from "./Components/User"
 import ProtectedRoute from "./Components/ProtectedRoute"
 import Register from "./Components/Register"
 import Login from "./Components/Login"
-import './Styles/styles.scss'
+import styles from './Styles/App.module.scss'
 
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.app}>
       <AuthProvider>
         <Switch>
           <Route exact path="/">

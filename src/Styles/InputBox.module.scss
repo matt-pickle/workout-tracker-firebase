@@ -1,0 +1,33 @@
+.inputBox {
+  display: flex;
+  margin: .25em;
+}
+
+label {
+  color: white;
+  padding: .5em 1em;
+  background-color: black;
+  border-radius: 5px 0 0 5px;
+}
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  width: 1.4em;
+  height: 1.1em;
+}
+
+.inputContainer {
+  background-color: white;
+  border-radius: 0 5px 5px 0;
+  padding: .5em .5em;
+}
+
+.Lift {
+  width: 8em;
+}
+
+.Weight {
+  width: 2em;
+}

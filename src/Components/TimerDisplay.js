@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import "../Styles/styles.scss"
+import styles from "../Styles/TimerDisplay.module.scss"
 
 function TimerDisplay(props) {
   const [minutesRemaining, setMinutesRemaining] = useState(props.minutes)
@@ -32,17 +32,17 @@ function TimerDisplay(props) {
 
   function timesUp() {
     if (minutesRemaining === "00" && secondsRemaining === "00") {
-      alert("Times Up!");
-      props.setTimerIsRunning(false);
+      alert("Times Up!")
+      props.setTimerIsRunning(false)
     }
   }
 
     return (
     <div>
-      <p className="timer-display">{`${minutesRemaining} : ${secondsRemaining}`}</p>
+      <p className={styles.timerDisplay}>{`${minutesRemaining} : ${secondsRemaining}`}</p>
       {timesUp()}
     </div>
   )
 }
 
-export default TimerDisplay;
+export default TimerDisplay

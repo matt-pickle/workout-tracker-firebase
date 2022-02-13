@@ -1,0 +1,20 @@
+@use "variables";
+
+.navButton {
+  flex: 1;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 5px;
+  padding: .5em 1.4em; 
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: black;
+  background-color: variables.$light-gray;
+  cursor: pointer;
+}
+
+.hovered {
+  background-color: variables.$dark-gray;
+}

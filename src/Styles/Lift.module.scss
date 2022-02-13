@@ -1,0 +1,14 @@
+@use "variables";
+
+.liftBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: variables.$medium-gray;
+  border-radius: 5px;
+  padding: .25em;
+}
+
+#addSetBtn {
+  margin: .25em;
+}

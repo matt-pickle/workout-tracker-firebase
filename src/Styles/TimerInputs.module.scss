@@ -1,0 +1,22 @@
+.timerInputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+#minutesInput,
+#secondsInput {
+  width: 1.59em;
+  height: 1.25em;
+  background-color: white;
+  font-weight: 700;
+  font-size: 4.25rem;
+  border: 0;
+  border-radius: 5px;
+}
+
+@media (max-width: 400px) {  
+  #minutesInput,
+  #secondsInput {
+    font-size: 3.6rem;
+  }
+}

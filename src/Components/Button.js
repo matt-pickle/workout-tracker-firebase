@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import "../Styles/styles.scss";
+import React, { useState } from "react"
+import styles from "../Styles/Button.module.scss"
 
 function Button(props) {
-  const [hoverClass, setHoverClass] = useState("");
+  const [hoverClass, setHoverClass] = useState("")
 
   //Applies hover effect class if not using a touch screen
   function hover() {
@@ -11,30 +11,31 @@ function Button(props) {
       || navigator.msMaxTouchPoints > 0) {
         setHoverClass("")
     } else {
-      setHoverClass("hovered");
+      setHoverClass("hovered")
     }
   }
 
   function unHover() {
-    setHoverClass("");
+    setHoverClass("")
   }
 
   function touch() {
-    setHoverClass("hovered");
+    setHoverClass("hovered")
   }
 
   function unTouch() {
-    setHoverClass("");
+    setHoverClass("")
   }
 
   return (
-    <button className={`button ${hoverClass}`}
-            id={props.id}
-            onMouseEnter={hover}
-            onMouseLeave={unHover}
-            onTouchStart={touch}
-            onTouchEnd={unTouch}
-            onClick={props.onClick}
+    <button
+      className={`${styles.button} ${styles[hoverClass]}`}
+      id={props.id}
+      onMouseEnter={hover}
+      onMouseLeave={unHover}
+      onTouchStart={touch}
+      onTouchEnd={unTouch}
+      onClick={props.onClick}
     >
       {props.text}
     </button>
